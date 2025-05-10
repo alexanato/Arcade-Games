@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.arcadeposproject.controllers.MainMenuController">
+   <children>
+      <Button layoutY="175.0" mnemonicParsing="false" onAction="#playGame" prefHeight="50.0" prefWidth="158.0" text="Play">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="preview" fitHeight="360.0" fitWidth="360.0" layoutX="204.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Assets/TicTacToeLogo.png" />
+         </image>
+      </ImageView>
+      <Button id="1" fx:id="rightButton" layoutX="564.0" layoutY="176.0" onAction="#nextGame" prefHeight="40.0" prefWidth="20.0">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/RightArrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="-1" fx:id="leftButton" layoutX="168.0" layoutY="176.0" onAction="#nextGame" prefHeight="40.0" prefWidth="20.0" rotate="180.0">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Assets/RightArrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
