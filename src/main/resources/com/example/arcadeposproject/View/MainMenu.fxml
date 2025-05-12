@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.arcadeposproject.controllers.MainMenuController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../Style/app.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.arcadeposproject.controllers.MainMenuController">
    <children>
-      <Button layoutY="175.0" mnemonicParsing="false" onAction="#playGame" prefHeight="50.0" prefWidth="158.0" text="Play">
+      <SVGPath pickOnBounds="true" id="1" content="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606C255,161.018,253.42,157.202,250.606,154.389z" fill="WHITE" layoutX="241.0" layoutY="-25.0" onMouseClicked="#nextGame" scaleX="0.15" scaleY="0.15" scaleZ="0.15" styleClass="next" />
+      <Button id="play-button" layoutX="202.0" layoutY="279.0" mnemonicParsing="false" onAction="#playGame" prefHeight="55.0" prefWidth="190.0" text="Play" textFill="WHITE">
          <font>
-            <Font size="23.0" />
+            <Font name="Arial Rounded MT Bold" size="27.0" />
          </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" offsetX="4.0" offsetY="8.0">
+               <color>
+                  <Color opacity="0.16255317628383636" />
+               </color>
+            </DropShadow>
+         </effect>
       </Button>
-      <ImageView fx:id="preview" fitHeight="360.0" fitWidth="360.0" layoutX="204.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+      <SVGPath pickOnBounds="true" id="-1" content="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606C255,161.018,253.42,157.202,250.606,154.389z" fill="WHITE" layoutX="23.0" layoutY="-25.0" onMouseClicked="#nextGame" rotate="180.0" scaleX="0.15" scaleY="0.15" styleClass="next" />
+      <Label layoutX="232.0" layoutY="200.0" prefHeight="34.0" prefWidth="130.0" text="awd" textFill="WHITE" />
+      <ImageView id="round" fx:id="preview" fitHeight="210.0" fitWidth="160.0" layoutX="217.0" layoutY="35.0" pickOnBounds="true" styleClass="round">
          <image>
-            <Image url="@../Assets/TicTacToeLogo.png" />
+            <Image url="@../Assets/TIC.png" />
          </image>
+         <clip>
+            <Rectangle arcHeight="20" arcWidth="20" height="210" width="160" />
+         </clip>
+
       </ImageView>
-      <Button id="1" fx:id="rightButton" layoutX="564.0" layoutY="176.0" onAction="#nextGame" prefHeight="40.0" prefWidth="20.0">
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Assets/RightArrow.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button id="-1" fx:id="leftButton" layoutX="168.0" layoutY="176.0" onAction="#nextGame" prefHeight="40.0" prefWidth="20.0" rotate="180.0">
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Assets/RightArrow.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>
