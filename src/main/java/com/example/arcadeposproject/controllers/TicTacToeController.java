@@ -11,7 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 public class TicTacToeController extends BasicController {
-    public TicTacToeModel model;
+    private TicTacToeModel model;
     @FXML
     private Canvas canvas;
     private GraphicsContext context;
@@ -19,11 +19,14 @@ public class TicTacToeController extends BasicController {
     @Override
     public void init(GameManager gameManager) {
         super.init(gameManager);
-        model = new TicTacToeModel();
         context = canvas.getGraphicsContext2D();
+    }
+    public void start(){
         drawBoard();
     }
+    public void stop() {
 
+    }
     @FXML
     private void click(MouseEvent event) {
         byte x = (byte) (event.getX() / 133.33);
@@ -32,7 +35,7 @@ public class TicTacToeController extends BasicController {
         if(model.isWinning()){
             gameManager.sendResult(((model.getPlayer())? "O has won":"X has won"));
         } else if (model.stalemate()) {
-            gameManager.sendResult("It’s a tie");
+            gameManager.sendResult("tie");
         }
         model.changeTurn();
         drawBoard();
@@ -50,13 +53,19 @@ public class TicTacToeController extends BasicController {
             for (int j = 0; j < model.getBoard()[i].length; j++) {
                 switch (model.getBoard()[i][j]) {
                     case PLAYER1_X -> {
-                        context.drawImage(Assets.X,133.33*i+5,133.33*j+5);
+                        context.drawImage(Assets.X,133.33*i+1,133.33*j+1);
                     }
                     case PLAYER2_O -> {
-                        context.drawImage(Assets.O,133.33*i+5,133.33*j+5);
+                        context.drawImage(Assets.O,133.33*i+1,133.33*j+1);
                     }
                 }
             }
         }
+    }
+    public TicTacToeModel getModel() {
+        return model;
+    }
+    public void setModel(TicTacToeModel model) {
+        if(model != null)this.model = model;
     }
 }

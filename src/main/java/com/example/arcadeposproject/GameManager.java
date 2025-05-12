@@ -11,11 +11,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class GameManager {
     private final Stage stage;
     private final List<Game> games = new ArrayList<>();
     private int currentGameIndex;
+    public final static Random random = new Random();
     public GameManager(Stage stage) {
         this.stage = stage;
     }
@@ -40,16 +42,17 @@ public class GameManager {
         currentGameIndex = gameIndex;
     }
     public void returnToMenu(){
-        switchTo("MainMenu.fxml");
+        switchTo("MainMenu2.fxml");
     }
     public void sendResult(String message){
         switchTo("Result.fxml",message );
     }
-    public BasicController switchTo(String fxmlFile){
+    private BasicController switchTo(String fxmlFile){
         BasicController controller = null;
         try{
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource ("View/"+fxmlFile));
             Parent root = loader.load();
+            root.getStylesheets().add(getClass().getResource("style/app.css").toExternalForm());
             stage.setScene(new Scene(root));
             stage.show();
             controller = (BasicController) loader.getController();
@@ -59,11 +62,12 @@ public class GameManager {
         }
         return controller;
     }
-    public BasicController switchTo(String fxmlFile,String message){
+    private BasicController switchTo(String fxmlFile,String message){
         BasicController controller = null;
         try{
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource ("View/"+fxmlFile));
             Parent root = loader.load();
+            root.getStylesheets().add(getClass().getResource("style/app.css").toExternalForm());
             stage.setScene(new Scene(root));
             stage.show();
             controller = (BasicController) loader.getController();

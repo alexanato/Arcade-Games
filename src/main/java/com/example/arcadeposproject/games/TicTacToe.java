@@ -13,8 +13,8 @@ public class TicTacToe extends Game {
         super(name, logo,viewPath);
     }
     public void start(GameManager gameManager,BasicController controller) {
-        TicTacToeModel model = new TicTacToeModel();
         this.controller = (TicTacToeController) controller;
-        this.controller.model = model;
+        this.controller.setModel(new TicTacToeModel());
+        this.controller.start();
     }
 }

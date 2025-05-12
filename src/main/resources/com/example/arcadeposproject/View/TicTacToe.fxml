@@ -3,7 +3,7 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.arcadeposproject.controllers.TicTacToeController">
+<AnchorPane styleClass="root" id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.arcadeposproject.controllers.TicTacToeController">
    <children>
       <Canvas fx:id="canvas" height="400.0" layoutX="102.0" onMouseClicked="#click" width="400.0" />
    </children>

@@ -1,6 +1,7 @@
 package com.example.arcadeposproject.controllers;
 
 import com.example.arcadeposproject.GameManager;
+import com.example.arcadeposproject.models.TicTacToeModel;
 
 public abstract class BasicController {
     protected GameManager gameManager;
@@ -12,4 +13,6 @@ public abstract class BasicController {
         this.gameManager = gameManager;
         this.message = message;
     }
+    public abstract void start();
+    public abstract void stop();
 }

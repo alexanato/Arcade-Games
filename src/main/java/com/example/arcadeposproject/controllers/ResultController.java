@@ -13,6 +13,17 @@ public class ResultController extends BasicController{
         super.init(gameManager,message);
         result.setText(message);
     }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
     @FXML
     private void replay(){
         gameManager.reloadGame();

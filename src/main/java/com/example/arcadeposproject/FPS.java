@@ -1,12 +1,12 @@
 package com.example.arcadeposproject;
 
 public class FPS {
-    private static long lastTime = 0;
-    private static int frames = 0;
-    private static long lastFrameTime = 0;
-    private static double fps = 0;
-    private static double deltaTime;
-    public static void Frame(long now){
+    private long lastTime = 0;
+    private int frames = 0;
+    private long lastFrameTime = 0;
+    private double fps = 0;
+    private double deltaTime;
+    public void Frame(long now){
         if (lastTime > 0) {
             long delta = now - lastTime;
 
@@ -22,11 +22,10 @@ public class FPS {
         }
         lastTime = now;
     }
-
-    public static double getFps() {
+    public double getFps() {
         return fps;
     }
-    public static double getDeltaTime() {
+    public  double getDeltaTime() {
         return deltaTime;
     }
 }
