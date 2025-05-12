@@ -42,7 +42,7 @@ public class GameManager {
         currentGameIndex = gameIndex;
     }
     public void returnToMenu(){
-        switchTo("MainMenu2.fxml");
+        switchTo("MainMenu.fxml");
     }
     public void sendResult(String message){
         switchTo("Result.fxml",message );
