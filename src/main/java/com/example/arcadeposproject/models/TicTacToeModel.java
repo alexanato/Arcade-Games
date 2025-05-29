@@ -22,9 +22,8 @@ public class TicTacToeModel {
                 board[i][j] = State.EMPTY;
             }
         }
-        scanner = new Scanner(System.in);
     }
-    private boolean isPlaceable(byte[] pos){
+    public boolean isPlaceable(byte[] pos){
         if(board[pos[0]][pos[1]] == State.EMPTY) return true;
         return false;
     }
@@ -37,7 +36,7 @@ public class TicTacToeModel {
         player = !player;
     }
     public boolean isWinning(){
-        State currentPlayer = ((player)?State.PLAYER2_O:State.PLAYER1_X);
+        State currentPlayer = ((!player)?State.PLAYER2_O:State.PLAYER1_X);
         if(board[0][0].equals(currentPlayer)&&board[1][0].equals(currentPlayer)&&board[2][0].equals(currentPlayer)) return true;
         if(board[0][1].equals(currentPlayer)&&board[1][1].equals(currentPlayer)&&board[2][1].equals(currentPlayer)) return true;
         if(board[0][2].equals(currentPlayer)&&board[1][2].equals(currentPlayer)&&board[2][2].equals(currentPlayer)) return true;
@@ -50,6 +49,20 @@ public class TicTacToeModel {
         if(board[0][2].equals(currentPlayer)&&board[1][1].equals(currentPlayer)&&board[2][0].equals(currentPlayer)) return true;
         return false;
     }
+    public byte[][] getWinningPos(){
+        State currentPlayer = ((!player)?State.PLAYER2_O:State.PLAYER1_X);
+        if(board[0][0].equals(currentPlayer)&&board[1][0].equals(currentPlayer)&&board[2][0].equals(currentPlayer)) return new byte[][]{{0,0},{1,0},{2,0}};
+        if(board[0][1].equals(currentPlayer)&&board[1][1].equals(currentPlayer)&&board[2][1].equals(currentPlayer)) return new byte[][]{{0,1},{1,1},{2,1}};
+        if(board[0][2].equals(currentPlayer)&&board[1][2].equals(currentPlayer)&&board[2][2].equals(currentPlayer)) return new byte[][]{{0,2},{1,2},{2,2}};
+
+        if(board[0][0].equals(currentPlayer)&&board[0][1].equals(currentPlayer)&&board[0][2].equals(currentPlayer)) return new byte[][]{{0,0},{0,1},{0,2}};;
+        if(board[1][0].equals(currentPlayer)&&board[1][1].equals(currentPlayer)&&board[1][2].equals(currentPlayer)) return new byte[][]{{1,0},{1,1},{1,2}};
+        if(board[2][0].equals(currentPlayer)&&board[2][1].equals(currentPlayer)&&board[2][2].equals(currentPlayer)) return new byte[][]{{2,0},{2,1},{2,2}};
+
+        if(board[0][0].equals(currentPlayer)&&board[1][1].equals(currentPlayer)&&board[2][2].equals(currentPlayer)) return new byte[][]{{0,0},{1,1},{2,2}};
+        if(board[0][2].equals(currentPlayer)&&board[1][1].equals(currentPlayer)&&board[2][0].equals(currentPlayer)) return new byte[][]{{0,2},{1,1},{2,0}};
+        return null;
+    }
     public boolean stalemate(){
         for (int i = 0; i< board.length;i++){
             for (int j = 0; j <board[i].length;j++){
@@ -60,5 +73,6 @@ public class TicTacToeModel {
     }
     public void onTurn(byte[] input){
         if(!place(input)) return;
+        changeTurn();
     }
 }

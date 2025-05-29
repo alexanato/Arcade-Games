@@ -29,7 +29,7 @@ public class SnakeController extends BasicController {
         super.init(gameManager);
         context = canvas.getGraphicsContext2D();
         gameLoop = new Timeline(
-                new KeyFrame(javafx.util.Duration.millis(200), e -> {
+                new KeyFrame(javafx.util.Duration.millis(300), e -> {
                     model.update();
                     if (model.checkCollision()) stop();
                     draw();
@@ -61,12 +61,34 @@ public class SnakeController extends BasicController {
         context.setFill(Color.RED);
         int[] applePos = model.getApple();
         context.fillRect(applePos[0] * 40, applePos[1] * 40, 40, 40);
+        SnakePiece lastPiece = model.getSnake().get(model.getSnake().size()-1);
         context.setFill(Color.WHITE);
-        for (SnakePiece snakePiece : model.getSnake()) {
+        context.fillRect(lastPiece.x * 40 + 10, lastPiece.y * 40 + 10, 20, 20);
+        switch (model.getCurrentDir()){
+            case UP -> {
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+10, lastPiece.y *40+15);
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+25, lastPiece.y *40+15);
+            }
+            case DOWN -> {
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+10, lastPiece.y *40+20);
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+25, lastPiece.y *40+20);
+            }
+            case LEFT -> {
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+15, lastPiece.y *40+10);
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+15, lastPiece.y *40+25);
+            }
+            case RIGHT -> {
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+20, lastPiece.y *40+10);
+                context.drawImage(Assets.SNAKE_EYE, lastPiece.x * 40+20, lastPiece.y *40+25);
+            }
+        }
+        for (int i = 0;i<model.getSnake().size()-1;i++) {
+            SnakePiece snakePiece = model.getSnake().get(i);
             int offSetX = 0;
             int offSetY = 0;
             int offSetW = 0;
             int offSetH = 0;
+
             switch (snakePiece.getDirection()) {
                 case UP:
                     offSetY = 20;

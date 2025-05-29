@@ -47,7 +47,7 @@ public class GameManager {
     public void sendResult(String message){
         switchTo("Result.fxml",message );
     }
-    private BasicController switchTo(String fxmlFile){
+    public BasicController switchTo(String fxmlFile){
         BasicController controller = null;
         try{
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource ("View/"+fxmlFile));

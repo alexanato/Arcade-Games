@@ -8,13 +8,13 @@ public class SnakePiece {
     private Direction direction;
 
     public SnakePiece(int x, int y,Direction direction) {
-        this.x = Math.abs(x);
-        this.y = Math.abs(y);
+        this.x = x;
+        this.y = y;
         this.direction = direction;
     }
     public SnakePiece(int[] pos,Direction direction) {
-        this.x = Math.abs(pos[0]);
-        this.y = Math.abs(pos[1]);
+        this.x = pos[0];
+        this.y = pos[1];
         this.direction = direction;
     }
     @Override

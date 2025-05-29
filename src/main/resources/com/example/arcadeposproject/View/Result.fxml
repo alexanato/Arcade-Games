@@ -12,7 +12,7 @@
             <Font size="31.0" />
          </font>
       </Button>
-      <Button layoutX="204.0" layoutY="271.0" mnemonicParsing="false" onAction="#menu" prefHeight="60.0" prefWidth="192.0" text="Menu" textFill="WHITE">
+      <Button layoutX="204.0" layoutY="271.0" mnemonicParsing="false" onAction="#menu" prefHeight="60.0" prefWidth="192.0" text="menu" textFill="WHITE">
          <font>
             <Font size="31.0" />
          </font>

@@ -9,10 +9,10 @@ import java.util.Arrays;
 
 public class SnakeModel {
     private Direction currentDir = Direction.NONE;
-    private Direction nextDir = Direction.NONE;
     private ArrayList<SnakePiece> snake = new ArrayList<>();
     private int[] apple;
     public final int size = 10;
+    private Direction nextDir = Direction.NONE;
 
     public void keyPressed(KeyEvent key) {
         switch (key.getCode()) {
@@ -52,20 +52,19 @@ public class SnakeModel {
         addNextPiece();
         if (!appleCollision) removeLastPiece();
         updateDir();
-        snake.get(snake.size() - 1).setDirection(Direction.NONE);
     }
 
     private void addNextPiece() {
         int[] direction = currentDir.getDir();
         int[] firstPiecePos = snake.get(snake.size() - 1).getPos();
         int[] pos = new int[]{firstPiecePos[0] + direction[0], firstPiecePos[1] + direction[1]};
-        snake.add(new SnakePiece(pos,Direction.NONE));
+        snake.add(new SnakePiece(pos, Direction.NONE));
     }
 
     private void updateDir() {
         for (int i = 0; i < snake.size() - 1; i++) {
             for (Direction dir : Direction.values()) {
-                int[] direction = new int[]{dir.getDir()[0],dir.getDir()[1]} ;
+                int[] direction = new int[]{dir.getDir()[0], dir.getDir()[1]};
                 if (snake.get(i).x + direction[0] == snake.get(i + 1).x && snake.get(i).y + direction[1] == snake.get(i + 1).y) {
                     snake.get(i).setDirection(dir);
                 }
@@ -108,5 +107,9 @@ public class SnakeModel {
 
     public int[] getApple() {
         return apple;
+    }
+
+    public Direction getCurrentDir() {
+        return currentDir;
     }
 }
