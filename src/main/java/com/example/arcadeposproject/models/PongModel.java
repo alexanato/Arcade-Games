@@ -16,7 +16,7 @@ public class PongModel {
     public double[] ballDirection = new double[2];
     private double[][] players = new double[2][2];
     private int speed = 600;
-    public int ballSpeed = 300;
+    public int ballSpeed = 400;
 
     public int[] points = new int[2];
     private double deltaTime;

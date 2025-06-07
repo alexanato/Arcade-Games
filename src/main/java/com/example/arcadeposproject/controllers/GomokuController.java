@@ -20,15 +20,15 @@ public class GomokuController extends BasicController {
         roundX = (int) (roundX * cellsize);
         roundY = (int) (roundY * cellsize);
         context.setFill(Color.WHITE);
-        context.fillOval(roundX, roundY, cellsize, cellsize);
+        context.fillOval(roundX+cellsize/4, roundY+cellsize/4, cellsize/2, cellsize/2);
     }
     @FXML
     private void click(MouseEvent event) {
         int roundX = (int) (event.getX()/cellsize);
         int roundY = (int) (event.getY()/cellsize);
         model.place(new int[] {roundX, roundY});
+        System.out.println(model.isWinning(roundX,roundY));
         draw();
-
     }
 
     @Override
