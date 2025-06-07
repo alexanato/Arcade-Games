@@ -5,14 +5,17 @@ import com.example.arcadeposproject.enums.State;
 
 import java.util.Arrays;
 
+
 public class GomokuModel {
     public boolean currentPlayer = false;//false = player 1
-    private State[][] board;
+    public State[][] board;
 
     public GomokuModel() {
         board = new State[15][15];
-        for (int i = 0; i < board.length;i++) {
-            Arrays.fill(board[i], State.EMPTY);
+        for(int i =0; i<15; i++){
+            for(int j =0; j<15; j++){
+                board[i][j] = State.EMPTY;
+            }
         }
     }
 
@@ -25,6 +28,19 @@ public class GomokuModel {
         if(!isPlaceable(pos))return false;
         board[pos[0]][pos[1]] = ((currentPlayer)?State.PLAYER2_O:State.PLAYER1_X);
         changeTurn();
+        return isWinning(pos[0],pos[1]);
+    }
+
+    public void changeTurn(){
+        currentPlayer = !currentPlayer;
+    }
+
+    public boolean stalemate(){
+        for (int i = 0; i< board.length;i++){
+            for (int j = 0; j <board[i].length;j++){
+                if(board[i][j].equals(State.EMPTY))return false;
+            }
+        }
         return true;
     }
     public boolean isWinning(int x,int y){
@@ -36,7 +52,6 @@ public class GomokuModel {
             int inRow =0;
             for (int i = 0; i<toWin;i++){
                 if(!isInBoard(dirPos)||board[dirPos[0]][dirPos[1]] != playerState)break;
-                System.out.println(Arrays.toString(dirPos));
                 dirPos = new int[]{dirPos[0]+dir.getDir()[0],dirPos[1]+dir.getDir()[1]};
                 inRow++;
             }
@@ -52,17 +67,4 @@ public class GomokuModel {
             return false;
         }
     }
-    public void changeTurn(){
-        currentPlayer = !currentPlayer;
-    }
-
-    public boolean stalemate(){
-        for (int i = 0; i< board.length;i++){
-            for (int j = 0; j <board[i].length;j++){
-                if(board[i][j].equals(State.EMPTY))return false;
-            }
-        }
-        return true;
-    }
-
 }

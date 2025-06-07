@@ -10,6 +10,7 @@ public enum Direction {
     DOWNLEFT(new int[]{-1,1}),
     UPRIGHT(new int[]{1,-1}),
     DOWNRIGHT(new int[]{1,1});
+
     private final int[] dir;
     Direction(int[] dir) {
         this.dir = dir;
