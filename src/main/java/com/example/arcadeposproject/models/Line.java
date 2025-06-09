@@ -10,8 +10,15 @@ public class Line {
     public final int[] endpos;
     public final State player;
     public Line(int[] startpos, int[] endpos, State player) {
-        this.startpos = startpos;
-        this.endpos = endpos;
+        if(startpos[0] > endpos[0] || startpos[1] > endpos[1]){
+
+            this.startpos = endpos;
+            this.endpos = startpos;
+        }
+        else{
+            this.startpos = startpos;
+            this.endpos = endpos;
+        }
         this.player = player;
     }
     public Direction getDirection() {

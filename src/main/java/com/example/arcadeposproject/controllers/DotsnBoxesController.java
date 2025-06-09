@@ -13,6 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class DotsnBoxesController extends BasicController {
     private DotsnBoxesModel model;
     @FXML
@@ -29,6 +32,18 @@ public class DotsnBoxesController extends BasicController {
             if((dragBegin[0]+1 == roundx && dragBegin[1] == roundy)||(dragBegin[0] == roundx && dragBegin[1]+1 == roundy)||(dragBegin[0]-1 == roundx && dragBegin[1] == roundy)||(dragBegin[0] == roundx && dragBegin[1]-1 == roundy)){
                 model.changePlayer();
                 model.addLine(new Line(dragBegin,new int[]{roundx,roundy},model.currentPlayer));
+                model.addPoint();
+                if(model.isWinning()){
+                    if(model.playerPoints[0] == model.playerPoints[1]){
+                        gameManager.sendResult("TIE!");
+                    }
+                    else if(model.playerPoints[0] > model.playerPoints[1]){
+                        gameManager.sendResult("RED HAS WON!");
+                    }
+                    else{
+                        gameManager.sendResult("BLUE HAS WON!");
+                    }
+                }
             }
             dragBegin = null;
             draw();
@@ -77,28 +92,35 @@ public class DotsnBoxesController extends BasicController {
                 context.fillOval(i, j-cellSize/10, cellSize/5, cellSize/5);
             }
         }
-        for(Line line: model.getLines()){
-            if(line.player == State.PLAYER1_X){
-                context.setStroke(Color.RED);
-            }
-            else{
-                context.setStroke(Color.BLUE);
-            }
-            if(line.getDirection() == Direction.UP || line.getDirection() == Direction.DOWN){
-                context.strokeLine(line.startpos[0]*cellSize+3, line.startpos[1]*cellSize+cellSize/2, line.endpos[0]*cellSize+3, line.endpos[1]*cellSize+cellSize/2);
-            }
-            else{
-                context.strokeLine(line.startpos[0]*cellSize+3, line.startpos[1]*cellSize+cellSize/2, line.endpos[0]*cellSize+3, line.endpos[1]*cellSize+cellSize/2);
+        for(int i = 0; i<9;i++){
+            for(int j = 0; j<9;j++){
+                if(model.getPointGivenPos()[i][j][0]){
+                    if(model.getPointGivenPos()[i][j][1]){
+                        context.setFill(Color.DARKBLUE);
+                    }
+                    else{
+                        context.setFill(Color.DARKRED);
+                    }
+                    context.fillRect(i*cellSize+3, j*cellSize+cellSize/2, cellSize, cellSize);
+                }
             }
         }
-
+        for(Line line: model.getLines()) {
+            if (line.player == State.PLAYER1_X) {
+                context.setStroke(Color.RED);
+            } else {
+                context.setStroke(Color.BLUE);
+            }
+            if (line.getDirection() == Direction.UP || line.getDirection() == Direction.DOWN) {
+                context.strokeLine(line.startpos[0] * cellSize + 3, line.startpos[1] * cellSize + cellSize / 2, line.endpos[0] * cellSize + 3, line.endpos[1] * cellSize + cellSize / 2);
+            } else {
+                context.strokeLine(line.startpos[0] * cellSize + 3, line.startpos[1] * cellSize + cellSize / 2, line.endpos[0] * cellSize + 3, line.endpos[1] * cellSize + cellSize / 2);
+            }
+        }
     }
 
     @Override
     public void start() {
-        model.addLine(new Line(new int[]{0,2}, new int[]{0,3},State.PLAYER1_X));
-        model.addLine(new Line(new int[]{0,2}, new int[]{1,2},State.PLAYER2_O));
-        model.addLine(new Line(new int[]{0,3}, new int[]{0,4},State.PLAYER2_O));
         draw();
     }
     @Override
