@@ -121,6 +121,27 @@ public class DotsnBoxesController extends BasicController {
 
     @Override
     public void start() {
+        Random random = new Random();
+        State state = State.PLAYER2_O;
+        for(int i = 0; i<10;i++){
+            for(int j = 0; j<10;j++){
+                Direction direction = Direction.DOWN;
+                int randomDir = random.nextInt(10);
+                if(state == State.PLAYER1_X) state = State.PLAYER2_O;
+                else state = State.PLAYER1_X;
+                if(randomDir == 0) direction = Direction.UP;
+                if(randomDir == 1) direction = Direction.UP;
+                if(randomDir == 2) direction = Direction.DOWN;
+                if(randomDir == 3) direction = Direction.DOWN;
+                if(randomDir == 4) direction = Direction.RIGHT;
+                if(randomDir == 5) direction = Direction.RIGHT;
+                if(randomDir == 6) direction = Direction.LEFT;
+                if(randomDir == 7) direction = Direction.LEFT;
+                if(randomDir == 8) continue;
+                if(randomDir == 9) continue;
+                model.addLine(new Line(new int[]{i,j},new int[]{i+direction.getDir()[0],j+direction.getDir()[1]},state));
+            }
+        }
         draw();
     }
     @Override

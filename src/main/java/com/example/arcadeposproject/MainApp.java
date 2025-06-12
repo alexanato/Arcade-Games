@@ -14,13 +14,12 @@ public class MainApp extends Application {
         gameManager = new GameManager(stage);
         gameManager.addGame(new TicTacToe("tic tac toe",Assets.TICTACTOE_LOGO,"TicTacToe.fxml"));
         gameManager.addGame(new Snake("Snake",Assets.SNAKE_LOGO,"Snake.fxml"));
-        gameManager.addGame(new Pong("a",Assets.PONG_LOGO,"Pong.fxml"));
-        gameManager.addGame(new TicTacToe("a",Assets.JUMPRUN_LOGO,"TicTacToe.fxml"));
-        gameManager.addGame(new Gomoku("a",Assets.JUMPRUN_LOGO,"Gomoku.fxml"));
-        gameManager.addGame(new DotsnBoxes("a",Assets.JUMPRUN_LOGO,"DotsnBoxes.fxml"));
+        gameManager.addGame(new Pong("Pong",Assets.PONG_LOGO,"Pong.fxml"));
+        gameManager.addGame(new Dame("Dame",Assets.DAME_LOGO,"Dame.fxml"));
+        gameManager.addGame(new Gomoku("Gomoku",Assets.GOMOKU_LOGO,"Gomoku.fxml"));
+        gameManager.addGame(new DotsnBoxes("Dots and Boxes",Assets.DOTSNBOX_Logo,"DotsnBoxes.fxml"));
         stage.setResizable(false);
         gameManager.returnToMenu();
-        gameManager.launch(5);
     }
 
     public static void main(String[] args) {

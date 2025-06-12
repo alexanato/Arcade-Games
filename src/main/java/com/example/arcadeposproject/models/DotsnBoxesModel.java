@@ -1,8 +1,10 @@
 package com.example.arcadeposproject.models;
+
 import com.example.arcadeposproject.controllers.DotsnBoxesController;
 import com.example.arcadeposproject.enums.Direction;
 import com.example.arcadeposproject.enums.State;
 import javafx.scene.shape.Rectangle;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,56 +17,59 @@ public class DotsnBoxesModel {
 
     public DotsnBoxesModel() {
         double cellSize = DotsnBoxesController.cellSize;
-        for(int i = 0; i<10; i++){
-            for(int j = 0; j<10; j++){
-                grid[i][j] = new Rectangle(i* cellSize,j* cellSize-cellSize/10+cellSize/2,cellSize/5,cellSize/5);
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                grid[i][j] = new Rectangle(i * cellSize, j * cellSize - cellSize / 10 + cellSize / 2, cellSize / 5, cellSize / 5);
             }
         }
     }
-    public boolean isWinning(){
-        for(int i = 0; i<9; i++){
-            for(int j = 0; j<9; j++){
-                if(!getPointGivenPos()[i][j][0]){
-                   return false;
+
+    public boolean isWinning() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (!getPointGivenPos()[i][j][0]) {
+                    return false;
                 }
             }
         }
         return true;
     }
 
-    public void addPoint(){
-        for(int i = 0; i<9; i++){
-            for(int j = 0; j<9; j++){
-                if(!pointGivenPos[i][j][0] && validLine(new int[]{i,j},Direction.RIGHT) && validLine(new int[]{i,j},Direction.DOWN) && validLine(new int[]{i,j+1},Direction.RIGHT) && validLine(new int[]{i+1,j},Direction.DOWN)){
+    public void addPoint() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (!pointGivenPos[i][j][0] && validLine(new int[]{i, j}, Direction.RIGHT) && validLine(new int[]{i, j}, Direction.DOWN) && validLine(new int[]{i, j + 1}, Direction.RIGHT) && validLine(new int[]{i + 1, j}, Direction.DOWN)) {
                     pointGivenPos[i][j][0] = true;
-                        if (currentPlayer == State.PLAYER1_X) {
-                            playerPoints[0]++;
-                            pointGivenPos[i][j][1] = false;
-                        } else {
-                            pointGivenPos[i][j][1] = true;
-                            playerPoints[1]++;
-                        }
+                    if (currentPlayer == State.PLAYER1_X) {
+                        playerPoints[0]++;
+                        pointGivenPos[i][j][1] = false;
+                    } else {
+                        pointGivenPos[i][j][1] = true;
+                        playerPoints[1]++;
+                    }
                     changePlayer();
                 }
             }
         }
     }
-    private boolean validLine(int[] startpos, Direction dir){
-        for(Line line: lines){
-            if(Arrays.equals(line.startpos, startpos) && startpos[0] + dir.getDir()[0] == line.endpos[0] && startpos[1] + dir.getDir()[1] == line.endpos[1]){
+
+    private boolean validLine(int[] startpos, Direction dir) {
+        for (Line line : lines) {
+            if (Arrays.equals(line.startpos, startpos) && startpos[0] + dir.getDir()[0] == line.endpos[0] && startpos[1] + dir.getDir()[1] == line.endpos[1]) {
                 return true;
             }
         }
         return false;
     }
-    public void changePlayer(){
-        if(currentPlayer == State.PLAYER1_X){
+
+    public void changePlayer() {
+        if (currentPlayer == State.PLAYER1_X) {
             currentPlayer = State.PLAYER2_O;
-        }
-        else{
+        } else {
             currentPlayer = State.PLAYER1_X;
         }
     }
+
     public Rectangle[][] getGrid() {
         return grid;
     }
@@ -78,13 +83,19 @@ public class DotsnBoxesModel {
     }
 
     public void addLine(Line line) {
-        for(Line l : lines){
-            if((Arrays.equals(l.startpos, line.startpos) && Arrays.equals(l.endpos, line.endpos))){
+        for (Line l : lines) {
+            if ((Arrays.equals(l.startpos, line.startpos) && Arrays.equals(l.endpos, line.endpos))) {
                 return;
             }
         }
-        lines.add(line);
+        //if(line.startpos[0]<9&&line.startpos[0]>=0&&line.startpos[1]<9&&line.startpos[1]>=0){
+        //    lines.add(line);
+        //}
+        if (line.endpos[0] < 10 && line.endpos[0] >= 0 && line.endpos[1] < 10 && line.endpos[1] >= 0&&line.startpos[0]>=0&&line.startpos[1]>=0) {
+            lines.add(line);
+        }
     }
+
     public boolean[][][] getPointGivenPos() {
         return pointGivenPos;
     }

@@ -1,6 +1,7 @@
 package com.example.arcadeposproject.models;
 
 import com.example.arcadeposproject.enums.DameState;
+import com.example.arcadeposproject.enums.State;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,16 @@ public class DameModel {
             }
         }
         return false;
+    }
+    public boolean isWinning(int player){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j].getNumber() == player) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     public int[][][] NextJumpPossible(int[] pos){
         List<int[][]> outputList = new ArrayList<>();

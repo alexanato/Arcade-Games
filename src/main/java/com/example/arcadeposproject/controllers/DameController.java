@@ -30,36 +30,52 @@ public class DameController  extends BasicController{
 
     @FXML
     private void release(MouseEvent event) {
-        if(dragData == null)return;
-        int roundX = (int)(event.getX()/cellSize);
-        int roundY = (int)(event.getY()/cellSize);
-        if(model.isValid(new int[]{roundX,roundY},dragData)){
-            /*if(model.nextTurn != null && model.isnextJump(dragData.dragBeginn, new int[]{roundX,roundY})) {
-                System.out.println("§a");
-                model.board[roundX][roundY] = dragData.state;
-                model.nextTurn = null;
-            } else if(model.nextTurn != null){
-                model.board[roundX][roundY] = dragData.state;
-                dragData = null;
-                draw();
-                return;
-            }*/
+        if (dragData == null) return;
 
-            model.changeTurn();
+        int roundX = (int) (event.getX() / cellSize);
+        int roundY = (int) (event.getY() / cellSize);
+        try {
+            DameState state =  model.board[roundX][roundY];
+        }catch (ArrayIndexOutOfBoundsException a){
+            return;
+        }
+        int[] target = new int[]{roundX, roundY};
 
-            if(roundY==7 && dragData.state == DameState.BLACK) dragData.state = DameState.BLACK_KING;
-            if(roundY==0 && dragData.state == DameState.RED) dragData.state = DameState.RED_KING;
+        if (model.isValid(target, dragData)) {
 
-            /*if(model.isValidJump(new int[]{roundX,roundY},dragData) && model.NextJumpPossible(new int[]{roundX,roundY}) != null){
-                System.out.println("aa");
-                model.nextTurn = model.NextJumpPossible(new int[]{roundX,roundY});
-                model.changeTurn();
-            }*/
+            // Damenumwandlung
+            if (roundY == 7 && dragData.state == DameState.BLACK) {
+                dragData.state = DameState.BLACK_KING;
+            }
+            if (roundY == 0 && dragData.state == DameState.RED) {
+                dragData.state = DameState.RED_KING;
+            }
 
             model.board[roundX][roundY] = dragData.state;
+
+            // Aktuellen Spieler ermitteln
+
+            // Spielerwechsel
+            model.changeTurn();
+
+            // Sieg prüfen (ob Gegner keine Steine mehr hat)
+
+
+        } else {
+            // Ungültiger Zug → Figur zurücksetzen
+            int[] start = dragData.dragBeginn;
+            model.board[start[0]][start[1]] = dragData.state;
         }
-        else {
-            model.board[dragData.dragBeginn[0]][dragData.dragBeginn[1]] = dragData.state;
+        int currentPlayer = dragData.state.getNumber();
+        int opponent = currentPlayer;
+        if (model.isWinning(opponent)) {
+            if (currentPlayer == 0) {
+                System.out.println("a");
+                gameManager.sendResult("Red won");
+            } else {
+                System.out.println("b");
+                gameManager.sendResult("Black won");
+            }
         }
         dragData = null;
         draw();
